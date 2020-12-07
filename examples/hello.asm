@@ -4,12 +4,22 @@
 	
 section .text:
 _start:
-	mov eax, 0x4                 ; systemcall to 'write'
-	mov ebx, 0x1                 ; file descriptor stdout
 	mov ecx, message             ; message
 	mov edx, message_len         ; length
-	int 0x80                     ; system call interrupt
-	
+	call _print
+	call _exit
+
+_print:
+	push rax
+	push rbx
+	mov eax, 0x4
+	mov ebx, 0x1
+	int 0x80
+	pop rax
+	pop rbx
+	ret 
+
+_exit:	
 	mov eax, 0x01                ; call exit
 	mov ebx, 0                   ; return 0
 	int 0x80                     ; system call interrupt
