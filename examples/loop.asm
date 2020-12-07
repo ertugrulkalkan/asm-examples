@@ -8,8 +8,6 @@ _start:
   mov rax, 0x00
   mov rbx, step_count_limit
 
-  ;; TODO : somehow it's not working as it should
-  ;; it loops double time [step_count_limit]
 _loop:
   call _printlp
   inc rax
