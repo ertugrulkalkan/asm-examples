@@ -2,8 +2,8 @@ ASM = nasm
 ASMFLAGS = -f elf64
 
 BIN = ./bin
-BUILD = $(BIN)/obj
-DIRECTORIES = $(BIN) $(BUILD)
+OBJ = $(BIN)/obj
+DIRECTORIES = $(BIN) $(OBJ)
 
 VPATH = ./examples
 
@@ -11,10 +11,10 @@ VPATH = ./examples
 	$(BIN)/$@.bin
 
 %.bin: %.o
-	ld $(BUILD)/$^ -o $(BIN)/$@
+	ld $(OBJ)/$^ -o $(BIN)/$@
 
 %.o: %.asm directories
-	$(ASM) $(ASMFLAGS) $< -o $(BUILD)/$@
+	$(ASM) $(ASMFLAGS) $< -o $(OBJ)/$@
 
 directories:
 	mkdir -p $(DIRECTORIES)
